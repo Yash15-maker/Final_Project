@@ -1,0 +1,31 @@
+#header{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.main-head{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+  
+}
+.nav-icon{
+    height: 40px;
+    margin-top: 25px;
+    margin-left: 30px;
+}
+.nav-logo{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.nav-text{
+    color:aliceblue;
+    margin-top: 25px;
+    
+}
+.main-icon{
+    margin-top: 30px;
+    height: 35px;
+}
