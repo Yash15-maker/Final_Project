@@ -7,6 +7,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,9 +39,43 @@ textField: {
   }
 }));
 
-export default function DeleteModal(props) {
+export default function EditModal(props) {
  
-const {edit,setEdit}=props;
+const {edit,setEdit,checkBox,EditFunction}=props;
+
+const [IcEdit, setIcEdit] = React.useState('');
+const [CptEdit, setCptEdit] = React.useState('');
+
+const onICEditChange = (event) => {
+  setIcEdit(event.target.value);
+
+}
+
+const onCPTEditChange = (event) => {
+  setCptEdit(event.target.value);
+}
+
+const notify = () => {
+  toast.success("Successfully Edited!",{
+    position: "top-center",
+  });
+}
+
+const onEditHandler = (event) => {
+
+  console.log("@@" + checkBox[0]);
+  console.log(IcEdit)
+  const editDetails = {
+      sl_no: checkBox[0],
+      invoice_currency: IcEdit,
+      cust_payment_terms: CptEdit
+  }
+
+  EditFunction(editDetails);
+  
+  setEdit(false);
+}
+
 const classes = useStyles();
   return (
     
@@ -62,7 +98,7 @@ const classes = useStyles();
                   color:"white"
                 }}
                 className={classes.textField}
-            
+                onChange={onICEditChange}
               />
             </form>
             <form noValidate autoComplete="off">
@@ -76,7 +112,7 @@ const classes = useStyles();
                   marginLeft: "30px",
                 }}
                 className={classes.textField}
-            
+                onChange={onCPTEditChange}
               />
             </form>
       </DialogContentText>
@@ -84,11 +120,13 @@ const classes = useStyles();
         <DialogActions className={classes.buttons}>
           
        
-          <Button variant="outlined"  disableElevation  onClick={()=>{
-              setEdit(false);
-          }} color="primary" className={classes.button1} >
-  Edit
+          <Button variant="outlined"  disableElevation  onClick={() => {
+              onEditHandler();
+              notify();
+            }} color="primary" className={classes.button1} >
+          Edit
 </Button>
+
           <Button variant="outlined"  disableElevation  onClick={()=>{
               setEdit(false);
           }} color="primary" className={classes.button1} >
@@ -97,6 +135,16 @@ const classes = useStyles();
      
         </DialogActions>
       </Dialog>
+
+      <ToastContainer position="top-center"
+autoClose={600}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover={false}/>
     </div>
   );
 }

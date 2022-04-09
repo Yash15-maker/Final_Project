@@ -8,7 +8,7 @@ const siteFooter = () => {
 const Footer = () => {
   return (
     <center style={{ paddingTop: "10px",color: "white" }}>
-      <a onClick={siteFooter} style={{color: "#1365DD"}} target_blank><u>Privacy Policy</u></a>|&copy; 2022 Highradius Corporation. All rights reserved.
+      <a onClick={siteFooter} style={{color: "#1365DD"}} target_blank  ><u>Privacy Policy</u></a>|&copy; 2022 Highradius Corporation. All rights reserved.
     </center>
   );
 };

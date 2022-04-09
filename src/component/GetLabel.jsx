@@ -52,9 +52,10 @@ for(let i=0;i<fieldarr.length;i++){
     mainarr.push({
         field:fieldarr[i],
         headerName:headarr[i],
-        width:150,
+        width:130,
         editable:false,
-        sortable:true
+        sortable:true,
+        
     })
 }
 

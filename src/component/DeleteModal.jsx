@@ -6,7 +6,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from "@material-ui/core/styles";
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -32,7 +33,22 @@ button1:{
 
 export default function DeleteModal(props) {
  
-const {open,setOpen}=props;
+const {open,setOpen,checkbox,deleteProp}=props;
+
+
+ const deleteHandler = (event) =>{
+  
+  console.log(checkbox);
+  deleteProp(checkbox);
+  setOpen(false);
+}
+
+const notify = () => {
+  toast.dark("Successfully Delted!",{
+    position: "top-center",
+  });
+}
+
 
 const classes = useStyles();
   return (
@@ -50,9 +66,12 @@ const classes = useStyles();
         <DialogActions className={classes.buttons}>
            
        
-          <Button variant="outlined"  disableElevation  onClick={()=>{
-              setOpen(false);
-          }} color="primary" className={classes.button1} >
+          <Button variant="outlined"  disableElevation        onClick={() => {
+              deleteHandler();
+              notify();
+            }}  color="primary" className={classes.button1}  
+          
+          >
     Delete
 </Button>
           <Button variant="outlined"  disableElevation  onClick={()=>{
@@ -63,6 +82,15 @@ const classes = useStyles();
           
         </DialogActions>
       </Dialog>
+      <ToastContainer position="top-center"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover={false}/>
     </div>
   );
 }

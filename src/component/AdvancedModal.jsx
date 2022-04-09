@@ -37,9 +37,48 @@ textField: {
   }
 }));
 
-export default function DeleteModal(props) {
+export default function AddModal(props) {
  
-const {advanced,setAdvanced}=props;
+const {advanced,setAdvanced,AdvancedSearch}=props;
+
+   const [DI,setDI]=React.useState('');
+   const [ID,setID]=React.useState('');
+   const [CN,setCN]=React.useState('');
+   const [BY,setBY]=React.useState('');
+   
+   
+
+   const onIDFetch = (event) => {
+    setID(event.target.value);
+}
+const onDIFetch= (event) => {
+  setDI(event.target.value);
+}
+const onCNFetch= (event) => {
+  setCN(event.target.value);
+}
+const onBYFetch= (event) => {
+  setBY(event.target.value);
+}
+
+   const FetchAdvancedData=()=>{
+    // event.preventDefault();
+ 
+    const data={
+        doc_id: DI,
+        invoice_id: ID,
+        cust_number: CN,
+        buisness_year: BY
+      }
+      AdvancedSearch(data);
+     console.log(data);
+      setAdvanced(false);
+    }
+    
+
+
+
+
 const classes = useStyles();
   return (
     
@@ -63,7 +102,7 @@ const classes = useStyles();
                
                 }}
                 className={classes.textField}
-            
+              onChange={onIDFetch}
               />
             </form>
             <form noValidate autoComplete="off">
@@ -77,7 +116,7 @@ const classes = useStyles();
                   marginLeft: "30px",
                 }}
                 className={classes.textField}
-            
+               onChange={onDIFetch}
               />
             </form>
             
@@ -94,7 +133,7 @@ const classes = useStyles();
                   color:"white"
                 }}
                 className={classes.textField}
-            
+                onChange={onCNFetch}
               />
             </form>
             <form noValidate autoComplete="off">
@@ -108,7 +147,7 @@ const classes = useStyles();
                   marginLeft: "30px",
                 }}
                 className={classes.textField}
-            
+              onChange={onBYFetch}
               />
             </form>
             
@@ -118,7 +157,8 @@ const classes = useStyles();
           
        
           <Button variant="outlined"  disableElevation  onClick={()=>{
-              setAdvanced(false);
+              FetchAdvancedData();
+        
           }} color="primary" className={classes.button1} >
 Search
 </Button>
